@@ -156,18 +156,34 @@ public class CadastroProdutos extends javax.swing.JFrame {
         precoStr = jTextFieldPreco.getText();
         
         if(!codStr.equals("") && !descricao.equals("") && !precoStr.equals("")){
+            boolean codigoEhIgual = false;
             int cod;
             double preco;
-            
             cod = Integer.parseInt(codStr);
             preco = Double.parseDouble(precoStr);
             
-            Produto p = new Produto(cod, descricao, preco);
+            for(int i = 0; i < supermercado.getProdutosCadastrados().size(); i++){
+                if(cod == supermercado.getProdutosCadastrados().get(i).getCodigo()){
+                    codigoEhIgual = true;
+                }
+            }
             
-            supermercado.insereProduto(p);
+            if(codigoEhIgual == false){
+                Produto p = new Produto(cod, descricao, preco);
             
-            JOptionPane.showMessageDialog(null, "Produto inserido com sucesso", "titulo da janela", JOptionPane.INFORMATION_MESSAGE);
+                supermercado.insereProduto(p);
             
+                JOptionPane.showMessageDialog(null, "Produto inserido com sucesso", "titulo da janela", JOptionPane.INFORMATION_MESSAGE);
+                
+                jTextFieldCod.setText("");
+                jTextFieldDescricao.setText("");
+                jTextFieldPreco.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Este código já foi registrado", "Erro validação", JOptionPane.ERROR_MESSAGE);
+                jTextFieldCod.setText("");
+            }
+
         }
         else{
            JOptionPane.showMessageDialog(null, "Você deve preecher todos os campos", "Erro validação", JOptionPane.ERROR_MESSAGE);

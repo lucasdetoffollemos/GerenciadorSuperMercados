@@ -122,13 +122,17 @@ public class Login extends javax.swing.JFrame {
                Usuario usuario = new Usuario(nome, cpf);
                
                CadastroProdutos cadastroProdutos = new CadastroProdutos(usuario);
+               
                cadastroProdutos.setVisible(true);
+               
+               
             }
             else{
                
             }
+            jTextFieldNome.setText("");
+            jTextFieldCpf.setText("");
             
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso", "titulo da janela", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
            JOptionPane.showMessageDialog(null, "Você deve preecher os campos de nome e cpf obrigatoriamete", "Erro validação", JOptionPane.ERROR_MESSAGE);
