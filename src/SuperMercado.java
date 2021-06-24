@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SuperMercado {
     private  ArrayList<Produto>  produtosCadastrados= new ArrayList<Produto>();
-
+   
     public ArrayList<Produto> getProdutosCadastrados() {
         return produtosCadastrados;
     }

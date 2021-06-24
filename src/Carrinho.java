@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 public class Carrinho {
+    
     private ArrayList<Produto> listaProdutos;
 
     public Carrinho() {
@@ -14,7 +15,13 @@ public class Carrinho {
         this.listaProdutos = listaProdutos;
     }
     
-    public void insereProduto(Produto p){}
+    public void insereProduto(Produto p){
+        listaProdutos.add(p);
+        
+        System.out.println("Código: " + p.getCodigo());
+        System.out.println("Código: " + p.getDescricao());
+        System.out.println("Código: " + p.getPreco());
+    }
     
     public void removeProduto(int cod){}
     
