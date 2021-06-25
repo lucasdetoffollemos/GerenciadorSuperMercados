@@ -1,4 +1,3 @@
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -111,8 +110,14 @@ public class Login extends javax.swing.JFrame {
                cadastroProdutos.setVisible(true);             
             }
             else{
-               CompraProdutos compraProdutos = new CompraProdutos(usuario);
-               compraProdutos.setVisible(true);   
+               if(CadastroProdutos.supermercado.getProdutosCadastrados().size() > 0){
+                    CompraProdutos compraProdutos = new CompraProdutos(usuario);
+                    compraProdutos.setVisible(true);   
+               }
+               else{
+                   JOptionPane.showMessageDialog(null, "Nenhum produto disponível", "Erro validação", JOptionPane.ERROR_MESSAGE);
+               }
+               
             }
             
             jTextFieldNome.setText("");

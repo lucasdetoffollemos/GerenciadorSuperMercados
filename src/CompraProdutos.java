@@ -1,13 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Lucas
- */
+import javax.swing.JOptionPane;
 public class CompraProdutos extends javax.swing.JFrame {
 
     /**
@@ -15,6 +6,7 @@ public class CompraProdutos extends javax.swing.JFrame {
      */
     public static Usuario usuario;
     public static Carrinho carrinho = new Carrinho();
+    public static double precoTotal;
     
     public CompraProdutos(Usuario u) {
         initComponents();
@@ -23,6 +15,12 @@ public class CompraProdutos extends javax.swing.JFrame {
         for(int i = 0; i < CadastroProdutos.supermercado.getProdutosCadastrados().size(); i++) {
             jComboBox1.addItem(CadastroProdutos.supermercado.getProdutosCadastrados().get(i).getDescricao());
         }
+    }
+    
+    private void totalPagar(){
+        precoTotal = carrinho.totalAPagar();
+        String totalStr = String.valueOf(precoTotal);
+        jLabelTotal.setText(totalStr); 
     }
 
     /**
@@ -41,6 +39,8 @@ public class CompraProdutos extends javax.swing.JFrame {
         jButtonDetalhes = new javax.swing.JButton();
         jButtonRemover = new javax.swing.JButton();
         jButtonEmitirNotaFiscal = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,9 +80,25 @@ public class CompraProdutos extends javax.swing.JFrame {
 
         jButtonRemover.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonRemover.setText("Retirar do Carrinho");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverActionPerformed(evt);
+            }
+        });
 
         jButtonEmitirNotaFiscal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonEmitirNotaFiscal.setText("Emitir Nota Fiscal");
+        jButtonEmitirNotaFiscal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEmitirNotaFiscalActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Total a pagar: ");
+
+        jLabelTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelTotal.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,16 +110,21 @@ public class CompraProdutos extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonEmitirNotaFiscal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(129, 129, 129)
+                        .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(94, 94, 94)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelTotal))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonEmitirNotaFiscal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,9 +142,13 @@ public class CompraProdutos extends javax.swing.JFrame {
                 .addComponent(jButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonEmitirNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelTotal))
+                .addGap(28, 28, 28)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -164,7 +189,37 @@ public class CompraProdutos extends javax.swing.JFrame {
         }
         
         carrinho.insereProduto(p);
+        JOptionPane.showMessageDialog(null, "Produto adicionado ao carrinho com sucesso", "titulo da janela", JOptionPane.INFORMATION_MESSAGE);
+        totalPagar();
     }//GEN-LAST:event_jButtonInserirActionPerformed
+
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        switch(JOptionPane.showConfirmDialog(null, "Tem certeza disso? ", "Retirar produto", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE)){
+            case 0: //botao sim
+                String produto = jComboBox1.getSelectedItem().toString();
+                int cod = 0;
+                for(int i = 0; i < carrinho.getListaProdutos().size(); i++) { 
+                   if(carrinho.getListaProdutos().get(i).getDescricao().equals(produto)){
+                       cod = carrinho.getListaProdutos().get(i).getCodigo();
+                       carrinho.removeProduto(cod);
+                   }
+                }
+                
+                JOptionPane.showMessageDialog(null, "Produto retirado do carrinho com sucesso", "titulo da janela", JOptionPane.INFORMATION_MESSAGE);
+                totalPagar();
+                break;
+        }
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
+
+    private void jButtonEmitirNotaFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmitirNotaFiscalActionPerformed
+        if(carrinho.getListaProdutos().size()>0){
+           NotaFiscal nota = new NotaFiscal(usuario);
+           nota.setVisible(true);
+        }
+        else{
+              JOptionPane.showMessageDialog(null, "Nenhum produto comprado", "titulo da janela", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonEmitirNotaFiscalActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -206,5 +261,7 @@ public class CompraProdutos extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelTotal;
     // End of variables declaration//GEN-END:variables
 }

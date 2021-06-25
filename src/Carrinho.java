@@ -17,16 +17,24 @@ public class Carrinho {
     
     public void insereProduto(Produto p){
         listaProdutos.add(p);
-        
-        System.out.println("Código: " + p.getCodigo());
-        System.out.println("Código: " + p.getDescricao());
-        System.out.println("Código: " + p.getPreco());
     }
     
-    public void removeProduto(int cod){}
+    public void removeProduto(int cod){ 
+        for(int i =0; i< listaProdutos.size(); i++){
+            if(cod == listaProdutos.get(i).getCodigo()){
+                listaProdutos.remove(i);
+            }
+        }
+    }
     
     public double totalAPagar(){
-        return 0;
+        double totalPagar = 0;
+        
+        for(int i =0; i< listaProdutos.size(); i++){
+            totalPagar = totalPagar + listaProdutos.get(i).getPreco();
+        }
+        
+        return totalPagar;
     }
     
     

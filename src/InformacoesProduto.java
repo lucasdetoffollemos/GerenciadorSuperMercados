@@ -52,25 +52,30 @@ public class InformacoesProduto extends javax.swing.JFrame {
         jLabel1.setText("Informações do Produto");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Código");
+        jLabel2.setText("Código:");
 
         jLabelCod.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelCod.setText("jLabel3");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Descrição");
+        jLabel3.setText("Descrição:");
 
         jLabelDesc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelDesc.setText("jLabel4");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Preço");
+        jLabel4.setText("Preço:");
 
         jLabelPreco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelPreco.setText("jLabel5");
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,6 +127,11 @@ public class InformacoesProduto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     /**
      * @param args the command line arguments
